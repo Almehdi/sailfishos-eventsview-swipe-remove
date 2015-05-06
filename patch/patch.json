@@ -1,0 +1,8 @@
+{
+    "name": "Eventsview notifications remove swipe",
+    "description": "Eventsview patch adding swipe right to remove notification action.",
+    "category": "homescreen",
+    "infos": {
+        "maintainer": "coderus"
+    }
+}

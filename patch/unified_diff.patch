@@ -1,0 +1,80 @@
+commit 7c925224193819479bb0d904d7fbdb765e349149
+Author: coderus <coderusinbox@gmail.com>
+Date:   Thu May 7 00:32:03 2015 +0500
+
+    patch done
+
+diff --git a/usr/share/lipstick-jolla-home-qt5/notifications/NotificationListView.qml b/usr/share/lipstick-jolla-home-qt5/notifications/NotificationListView.qml
+index b87c110..e8dddba 100644
+--- a/usr/share/lipstick-jolla-home-qt5/notifications/NotificationListView.qml
++++ b/usr/share/lipstick-jolla-home-qt5/notifications/NotificationListView.qml
+@@ -62,6 +62,69 @@ SilicaListView {
+         property bool beforeNotificationLimit: (!notificationList.hasNotificationLimit
+                                                 || notificationList.notificationLimit > index)
+ 
++        drag.target: notificationDelegate
++        drag.axis: Drag.XAxis
++        drag.minimumX: 0
++        drag.maximumX: width
++        drag.onActiveChanged: {
++            if (!drag.active) {
++                if (x > width / 3) {
++                    state = "removing"
++                }
++                else {
++                    state = "default"
++                }
++            }
++        }
++
++        state: "default"
++
++        states: [
++            State {
++                name: "default"
++            },
++            State {
++                name: "dragging"
++                when: drag.active
++            },
++            State {
++                name: "removing"
++            }
++        ]
++
++        transitions: [
++            Transition {
++                from: "dragging"
++                to: "default"
++                NumberAnimation {
++                    target: notificationDelegate
++                    properties: "x"
++                    to: 0
++                    duration: 300
++                }
++            },
++            Transition {
++                from: "dragging"
++                to: "removing"
++                SequentialAnimation {
++                    NumberAnimation {
++                        target: notificationDelegate
++                        properties: "x"
++                        to: width
++                        duration: 200
++                    }
++                    ScriptAction {
++                        script: remove()
++                    }
++                    ScriptAction {
++                        script: {
++                            x = 0
++                        }
++                    }
++                }
++            }
++        ]
++
+         ListView.onAdd: {
+             if (notificationList.populated)
+                 addAnimation.start()
