@@ -1,7 +1,7 @@
 Name:       sailfishos-eventsview-swipe-remove
 
 # >> macros
-BuildArch: sailfish_latest_armv7hl
+BuildArch: armv8el
 # << macros
 
 Summary:    Eventsview notifications remove swipe
