@@ -11,7 +11,7 @@ Group:      Qt/Qt
 License:    TODO
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   patchmanager
-Requires:   lipstick-jolla-home-qt5 = 0.24.41.4-10.75.1.jolla
+Requires:   lipstick-jolla-home-qt5 = 0.24.68.4-10.83.5.jolla
 
 %description
 Eventsview patch adding swipe right to remove notification action.
